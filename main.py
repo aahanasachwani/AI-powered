@@ -30,3 +30,19 @@ def main():
 
 if __name__=="__main__":
     main()
+
+
+#use offline version
+
+from transformers import pipeline
+from PIL import Image
+
+captioner = pipeline(
+    "image-to-text",
+    model="Salesforce/blip-image-captioning-base"
+)
+
+image = Image.open("sample.jpg").convert("RGB")
+result = captioner(image)
+
+print("Caption:", result[0]["generated_text"])
